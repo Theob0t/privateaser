@@ -190,8 +190,7 @@ The commission is split like this:
 
 function commissionPrice(){
 	var commission;
-	var j;
-	for (j=0; j<events.length; j++){ 
+	for (var j=0; j<events.length; j++){ 
 		commission = events[j].price*0.3;
 		events[j].commission.insurance = commission*0.5;
 		events[j].commission.treasury = 1;
@@ -200,9 +199,29 @@ function commissionPrice(){
 	
 }
 
+
+//Step 4 - The famous deductible
+
+/*In case of an accident/theft, Privateaser applies a 5000€ deductible.
+
+The booker can reduce the deductible amount from 5000€ to 200€ with a deductible option for a few more euros per person.
+
+The deductible
+The booker is charged an additional 1€/person when he chooses the deductible reduction option.
+
+The additional charge goes to Privateaser, not to the bar.*/
+
+function deductibleTrue(){
+	var nbperson;
+	for (var j=0; j<events.length; j++){ 
+		if (events[j].options.deductibleReduction) {events[j].price = events[j].price + events[j].persons};
+	}
+}
+
 bookingPrice();
 decreasesPrice();
 commissionPrice();
+deductibleTrue();
 console.log(bars);
 console.log(events);
 console.log(actors);
