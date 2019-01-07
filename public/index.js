@@ -164,7 +164,23 @@ var peopleComp; //people component: the number of persons multiplied by the bar 
 	}
 }
 
+//Step 2 - Send more, pay less
+
+/*decreases by 10% after 10 persons
+decreases by 30% after 20 persons
+decreases by 50% after 60 persons*/
+
+function decreasesPrice(){
+	 
+	for (var j=0; j<events.length; j++){ 
+		if (events[j].persons >10 && events[j].persons <= 20) events[j].price = events[j].price*0.9;
+		if (events[j].persons >20 && events[j].persons <= 60) events[j].price = events[j].price*0.7;
+		if (events[j].persons >60) events[j].price = events[j].price*0.5;
+	}		
+}
+
 bookingPrice();
+decreasesPrice();
 console.log(bars);
 console.log(events);
 console.log(actors);
