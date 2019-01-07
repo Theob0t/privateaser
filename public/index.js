@@ -218,10 +218,43 @@ function deductibleTrue(){
 	}
 }
 
+
+//Step 5 - Pay the actors
+
+/*It's time to debit/credit each actor!
+
+The booker must pay the booking price events[j].price and the (optional) deductible reduction
+The bar receives the booking price minus the commission events[j].price*0.7;
+The insurance receives its part of the commission events[j].commission.insurance
+The Treasury receives its part of the tax commission events[j].commission.treasury
+Privateaser receives its part of the commission events[j].commission.privateaser = events[j].price - commission - 1; 
+, plus the deductible reduction (1€/person if true)
+
+Just tell me what to do
+Compute the debit for the booker
+Compute the credit of the bar, insurance, Treasury and Privateaser.*/
+
+function actorsPay(){
+	for(var i=0; i<events.length; i++){
+		for (var j=0; j<actors.length; j++){
+			if (events[i].id == actors[j].eventId){
+			for(var k=0; k<actors[j].payment.length; k++){
+				if (actors[j].payment[k].who == "booker")actors[j].payment[k].amount = events[i].price;
+				if (actors[j].payment[k].who == "bar")actors[j].payment[k].amount = events[i].price*0.7;
+				if (actors[j].payment[k].who == "insurance")actors[j].payment[k].amount = events[i].commission.insurance;
+				if (actors[j].payment[k].who == "treasury")actors[j].payment[k].amount = events[i].commission.treasury;
+				if (actors[j].payment[k].who == "privateaser")actors[j].payment[k].amount = events[i].commission.privateaser + events[i].persons;
+				} 
+			}
+		}
+	}
+}	
+
 bookingPrice();
 decreasesPrice();
 commissionPrice();
 deductibleTrue();
+actorsPay();
 console.log(bars);
 console.log(events);
 console.log(actors);
