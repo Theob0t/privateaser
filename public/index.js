@@ -179,8 +179,30 @@ function decreasesPrice(){
 	}		
 }
 
+//Step 3 - Give me all your money
+
+/*There is a 30% commission on the booking price to cover the costs.
+
+The commission is split like this:
+	insurance: half of commission
+	the Treasury: 1€ by person
+	Privateaser: the rest*/
+
+function commissionPrice(){
+	var commission;
+	var j;
+	for (j=0; j<events.length; j++){ 
+		commission = events[j].price*0.3;
+		events[j].commission.insurance = commission*0.5;
+		events[j].commission.treasury = 1;
+		events[j].commission.privateaser = events[j].price - commission - 1;
+	}
+	
+}
+
 bookingPrice();
 decreasesPrice();
+commissionPrice();
 console.log(bars);
 console.log(events);
 console.log(actors);
