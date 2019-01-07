@@ -146,6 +146,25 @@ const actors = [{
   }]
 }];
 
+//Step 1 - Euro-People
+
+function bookingPrice (){
+var timeComp; //time component: the number of booked time multiplied by the bar price per hour
+var peopleComp; //people component: the number of persons multiplied by the bar price per person
+	
+	for(var i=0; i<bars.length; i++){
+		for (var j=0; j<events.length; j++){
+			
+			if (bars[i].id == events[j].barId){
+			timeComp = bars[i].pricePerHour * events[j].time;
+			peopleComp = bars[i].pricePerPerson * events[j].persons;
+			events[j].price = timeComp + peopleComp;	
+			}
+		}
+	}
+}
+
+bookingPrice();
 console.log(bars);
 console.log(events);
 console.log(actors);
