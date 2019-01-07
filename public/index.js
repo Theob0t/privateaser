@@ -194,7 +194,7 @@ function commissionPrice(){
 		commission = events[j].price*0.3;
 		events[j].commission.insurance = commission*0.5;
 		events[j].commission.treasury = 1;
-		events[j].commission.privateaser = events[j].price - commission - 1;
+		events[j].commission.privateaser = events[j].price - events[j].commission.insurance - events[j].commission.treasury;
 	}
 	
 }
